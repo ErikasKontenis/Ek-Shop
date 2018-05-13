@@ -1,0 +1,28 @@
+{
+    "name": "The standalone EK-Shop application",
+    "short_name": "EK-SHOP",
+    "lang": "en-US",
+    "start_url": "/",
+    "display": "standalone",
+
+    "theme_color": "#472D21",
+    "background_color": "#C0B764",
+    "icons": [
+        {
+            "src": "content/uploads/akriliniai_dazai.png",
+            "sizes": "96x96"
+        },
+        {
+            "src": "content/uploads/akriliniai_dazai.png",
+            "sizes": "144x144"
+        },
+        {
+            "src": "content/uploads/akriliniai_dazai.png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "content/uploads/akriliniai_dazai.png",
+            "sizes": "512x512"
+        }
+    ]
+}

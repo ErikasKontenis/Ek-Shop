@@ -1,0 +1,12 @@
+<div class="dropdown" [ngClass]="{'open': isDropdownOpen}">
+    <input class="form-control"
+           [(ngModel)]="field.value"
+           (keyup)="onKeyup(field.value)"
+           (blur)="onBlur()" />
+    <ul class="dropdown-menu searchbox-menu">
+        <li *ngFor="let item of items | async" [ngClass]="{'dropdown-header': item.isHeader}">
+            <span *ngIf="item.isHeader">{{item.text}}</span>
+            <a style="cursor:pointer" *ngIf="!item.isHeader" (mousedown)="onSelectClick(item);" title="{{item.text}}">{{item.text}}</a>
+        </li>
+    </ul>
+</div>

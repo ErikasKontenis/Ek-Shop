@@ -1,0 +1,15 @@
+<div class="dropdown" dropdown>
+    <button class="btn btn-default dropdown-toggle" type="button" [disabled]="field.getCharacteristic('isDisabled')" dropdownToggle [ngClass]="field.getCharacteristic('primaryCssClass')">
+        {{fieldText || field.getCharacteristic('placeholder')}}
+        <span class="caret"></span>
+    </button>
+    <ng-container *ngIf="field.items">
+        <ul class="dropdown-menu" *dropdownMenu>
+            <li *ngFor="let item of field.items" [ngClass]="{'dropdown-header':item.isHeader}">
+                <span *ngIf="item.isHeader">{{item.text}}</span>
+                <a *ngIf="!item.isHeader" (click)="onSelectClick(item);" style="cursor: pointer;">{{item.text}}</a>
+            </li>
+        </ul>
+    </ng-container>
+</div>
+<span class="help-block data-error">{{field.message}}</span>

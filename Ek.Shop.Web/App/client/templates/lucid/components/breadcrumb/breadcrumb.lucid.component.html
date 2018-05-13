@@ -1,0 +1,15 @@
+<ol class="breadcrumb" itemscope="" itemtype="http://schema.org/BreadcrumbList" style="width: 100%">
+    <li *ngFor="let navigation of navigations; let isFirst = first" class="breadcrumb-item" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+        <a class="text-muted" itemprop="item" title="{{navigation.getBreadcrumbName()}}"
+            [href]="[navigation.url]">
+            <span itemprop="name">{{navigation.getBreadcrumbName()}}</span>
+        </a>
+    </li>
+    <li class="breadcrumb-item" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+        <span *ngIf="!lastNavigation.parameters.isLastBreadcrumbUrlActive" class="active" itemprop="name" title="{{lastNavigation.getBreadcrumbName()}}">{{lastNavigation.getBreadcrumbName()}}</span>
+        <a *ngIf="lastNavigation.parameters.isLastBreadcrumbUrlActive" class="active" itemprop="item" title="{{lastNavigation.getBreadcrumbName()}}"
+            [href]="[lastNavigation.url]">
+            <span itemprop="name">{{lastNavigation.getBreadcrumbName()}}</span>
+        </a>
+    </li>
+</ol>

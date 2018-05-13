@@ -1,0 +1,11 @@
+<div class="col-md-5 col-sm-5 col-xs-12 form-group top_search">
+    <div class="input-group">
+        <input type="text" class="form-control"
+            [(ngModel)]="field.value"
+            [placeholder]="field.getCharacteristic('placeholder') || ''"
+            [disabled]="field.getCharacteristic('isDisabled')">
+        <span class="input-group-btn">
+            <button class="btn btn-default" type="button" (click)="onClick();"><i class="glyphicon glyphicon-search"></i></button>
+        </span>
+    </div>
+</div>

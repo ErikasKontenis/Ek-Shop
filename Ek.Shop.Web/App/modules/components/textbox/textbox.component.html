@@ -1,0 +1,7 @@
+<input [type]="field.getCharacteristic('htmlType') || 'text'"
+       [(ngModel)]="field.value"
+       (blur)="onBlur()"
+       [placeholder]="field.getCharacteristic('placeholder') || ''"
+       [disabled]="field.getCharacteristic('isDisabled')"
+       class="form-control" />
+<span class="help-block data-error" *ngIf="field.message">{{field.message}}</span>

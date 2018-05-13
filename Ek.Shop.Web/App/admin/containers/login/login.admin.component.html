@@ -1,0 +1,27 @@
+<div *ngIf="category">
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="login_wrapper">
+                <div class="animate form login_form">
+                    <section class="login_content">
+                        <form>
+                            <h1>{{category.getCharacteristic('name')}}</h1>
+                            <span *ngFor="let headerError of category.headerErrors" class="error">{{headerError}}</span>
+                            <div *ngFor="let item of category.getFieldset('login').fields | keys">
+                                <app-field [field]="item.value"></app-field>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="separator">
+                                <div>
+                                    <h1><i class="fa fa-shopping-cart"></i> EK-SHOP</h1>
+                                    <p>©{{dateNow | date: 'yyyy'}} All Rights Reserved.</p>
+                                </div>
+                            </div>
+                        </form>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,10 @@
+<ng-container [ngSwitch]="field.getCharacteristic('fieldType')">
+    <app-button [field]="field" *ngSwitchCase="'Button'"></app-button>
+    <app-checkbox [field]="field" *ngSwitchCase="'Checkbox'"></app-checkbox>
+    <app-dropdown [field]="field" *ngSwitchCase="'Dropdown'"></app-dropdown>
+    <app-pagination [field]="field" *ngSwitchCase="'Pagination'"></app-pagination>
+    <app-classifier-textbox [field]="field" *ngSwitchCase="'ClassifierTextbox'"></app-classifier-textbox>
+    <app-radio [field]="field" *ngSwitchCase="'Radio'"></app-radio>
+    <app-text [field]="field" *ngSwitchCase="'Text'"></app-text>
+    <app-textbox [field]="field" *ngSwitchCase="'Textbox'"></app-textbox>
+</ng-container>

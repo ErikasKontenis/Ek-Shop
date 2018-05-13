@@ -1,0 +1,41 @@
+<div class="container" *ngIf="category">
+    <div class="row">
+        <breadcrumb-lucid [navigations]="category.navigations"></breadcrumb-lucid>
+        <div *ngIf="category.getCharacteristic('description')" class="cat-page-description" [innerHTML]="category.getCharacteristic('description')"></div>
+        <h1 class="pav col-sm-8 col-md-9 col-lg-9" style="margin-left:-15px;">{{category.getCharacteristic('name')}}</h1>
+        <div class="col-sm-4 col-md-3 col-lg-3">
+            <div class="category-title">
+                <div class="btn-group">
+                    <app-field [field]="category.getFieldset('baseProductCategoryHeader').getField('sorting')"></app-field>
+                </div>
+                <div class="btn-group">
+                    <app-field [field]="category.getFieldset('baseProductCategoryHeader').getField('pageSize')"></app-field>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" *ngIf="category.products && category.products.items" style="margin-left: -30px;">
+        <div *ngFor="let product of category.products.items" class="col-sm-6 col-md-4 col-lg-3 text-center">
+            <div class="list-item">
+                <a [href]="[product.url]" style="color: #333;">
+                    <div class="item-thumbnail">
+                        <img *ngIf="!product.images?.length" class="img-cat" src="/Content/Uploads/0.gif" alt="{{product.getCharacteristic('name')}}" />
+                        <img *ngIf="product.images?.length" class="img-cat" src="/content/uploads/{{product.images[0].url}}" alt="{{product.images[0].getCharacteristic('name') || product.getCharacteristic('name')}}" />
+                        <div class="caption item-content">
+                            <p *ngIf="product.detailsCount > 0">{{product.detailsCount}} pasirinkimai</p>
+                        </div>
+                        <div class="item-discount-tag">
+                            <div class="product-tag item-discount" *ngIf="product.discount != 0">-{{(product.price - (product.getTotalPrice())) / product.price * 100 | number: '1.0-0'}}%</div>
+                        </div>
+                    </div>
+                    <h4 class="caption" style="height: 65px">{{product.characteristics?.name}}</h4> <!--TODO: nuimk h4 nesamoningus ir uzdek klase-->
+                    <div *ngIf="!product.discount" class="lead">{{product.price | number : '1.2-2'}} €</div>
+                    <div *ngIf="product.discount" class="lead"><span style="color:red;">{{product.getTotalPrice() | number : '1.2-2'}} € </span><sup><s>{{product.price | number : '1.2-2'}}</s> €</sup></div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <ng-container *ngIf="category.products && category.products.items">
+        <app-field [field]="category.getFieldset('categoryPagination').getField('pagination')" style="margin-left: -15px;"></app-field>
+    </ng-container>
+</div>

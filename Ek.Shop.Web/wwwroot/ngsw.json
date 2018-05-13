@@ -1,0 +1,41 @@
+{
+  "configVersion": 1,
+  "index": "/",
+  "appData": {
+    "name": "The standalone EK-Shop application",
+    "description": "The alpha stage standalone progressive web application "
+  },
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "urls": [
+        "/ngsw-worker.js"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "urls": [],
+      "patterns": []
+    },
+    {
+      "name": "fonts",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "urls": [],
+      "patterns": [
+        "https:\\/\\/fonts\\.googleapis\\.com\\/.*",
+        "https:\\/\\/fonts\\.gstatic\\.com\\/.*",
+        "https:\\/\\/cdn\\.ampproject\\.org\\/.*"
+      ]
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/ngsw-worker.js": "cc9f9d13e189ccf4b9ec7f2734786cf6dc775c9d"
+  }
+}

@@ -1,0 +1,112 @@
+<div class="top-head" *ngIf="firstNavigation">
+    <div class="container">
+        <div class="row margin-top">
+            <div class="col-sm-4 col-md-4 col-lg-3">
+                <a [href]="['/']" style="display: table;">
+                    <img src="/Content/Uploads/Web/kanceliarineparduotuve1.png" alt="kanceliarine parduotuve" style="margin-bottom: 10px;" />
+                </a>
+                <div class="col-xs-5 only-tablets">
+
+                </div>
+            </div>
+            <div class="container col-sm-8 col-md-8 col-lg-8">
+                <div class="only767" *ngFor="let parentNavigation of topNavigations">
+                    <div class="form-group col-sm-2 col-md-2 col-lg-2" *ngFor="let navigation of topNavigations | navMenu:parentNavigation.id">
+                        <label class="theme-text" style="margin-top: 10px">
+                            <a [href]="[parentNavigation.url + '/' + navigation.url]" title="{{navigation.getNavigationName()}}">
+                                {{navigation.getNavigationName()}}
+                            </a>
+                        </label>
+                    </div>
+                </div>
+                <div class="only767" *ngFor="let parentNavigation of topUserNavigations">
+                    <ng-container *ngFor="let navigation of topUserNavigations | navMenu:parentNavigation.id">
+                        <div class="form-group col-sm-2 col-md-2 col-lg-2" *ngIf="navigation.getCharacteristic('accessLevel') == 'OnlyGuest' && !userService.user || navigation.getCharacteristic('accessLevel') == 'OnlyAuthenticated' && userService.user">
+                            <label class="theme-text" style="margin-top: 10px">
+                                <a [href]="[parentNavigation.url + '/' + navigation.url]" title="{{navigation.getNavigationName()}}">
+                                    {{navigation.getNavigationName()}}
+                                </a>
+                            </label>
+                        </div>
+                    </ng-container>
+                </div>
+                <!--<app-dropdown [field]="languagesDropdown"></app-dropdown>-->
+            </div>
+        </div>
+    </div>
+</div>
+<div class="navbar navbar-inverse navbar-static-top top-nav">
+    <ng-container>
+        <div class="container" *ngIf="firstNavigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" (click)="doCollapseMenu()">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div ng-show="authenticated == 1">
+                    <a href="/user/basket" ng-click="isCollapsed = true"><span class="glyphicon glyphicon-shopping-cart login-icons" style="font-size:35px; color:#f9f9f9;margin-right:10px;margin-top:6px;"></span></a>
+                    <a href="/user/profile" ng-click="isCollapsed = true"><span class="glyphicon glyphicon-user login-icons" style="font-size:35px; color:#f9f9f9;margin-right:10px;margin-top:6px;"></span></a>
+                    <a href="/user/logout" ng-click="isCollapsed = true"><span class="glyphicon glyphicon-log-out login-icons" style="font-size:35px; color:#f9f9f9;margin-top:6px;"></span></a>
+                </div>
+                <div ng-show="authenticated == 0 || authenticated == null">
+                    <a href="/user/login" ng-click="isCollapsed = true" title="prisijungti"><span class="glyphicon glyphicon-user login-icons" style="font-size:35px; color:#f9f9f9;margin-right:10px;margin-top:6px;"></span></a>
+                </div>
+            </div>
+
+
+
+            <div class="navbar-collapse" [ngClass]="{collapse: isCollapsed}">
+                <ul class="nav navbar-nav only-tablets" *ngFor="let navigation of productNavigations | callback: filterParentNavigation">
+                    <li *ngIf="navigation.parentId == null">
+                        <!--<a [routerLink]="['/' + navigation.url]" ng-click="isCollapsed = !isCollapsed"><b>{{navigation.getNavigationName()}}</b></a>-->
+                    </li>
+                    <!--<li><a [routerLink]="['/kanceliarines-prekes']" ng-click="isCollapsed = !isCollapsed"><b>Kanceliarinės prekės</b></a></li>
+                    <li><a [routerLink]="['/mokyklines-prekes']" ng-click="isCollapsed = !isCollapsed"><b>Mokyklinės prekės</b></a></li>
+                    <li><a [routerLink]="['/dailes-braizymo-priemones']" ng-click="isCollapsed = !isCollapsed"><b>Dailės ir braižymo priemonės</b></a></li>
+                    <li><a href="/biuro-priemones-technika" ng-click="isCollapsed = !isCollapsed"><b>Biuro priemonės ir technika</b></a></li>-->
+                </ul>
+                <ul class="nav navbar-nav only1240">
+                    <li class="dropdown" dropdown>
+                        <span class="btn btn-link dropdown-toggle" dropdownToggle>
+                            {{firstNavigation.getNavigationName()}}
+                            <span class="glyphicon glyphicon-menu-hamburger" style="float:right"></span>
+                        </span>
+                        <ul class="dropdown-menu" *dropdownMenu>
+                            <ng-container *ngFor="let parentNavigation of parentProductNavigations; let isLastParentNavigation = last">
+                                <li class="dropdown-submenu">
+                                    <a [href]="[firstNavigation.url + '/' + parentNavigation.url]">
+                                        <b>{{parentNavigation.getNavigationName()}}</b>
+                                    </a>
+                                    <ul class="dropdown-menu multi-column columns-4">
+                                        <li class="row">
+                                            <div class="col-sm-3" *ngFor="let container of formSub1ProductNavigationContainers(parentNavigation.id)">
+                                                <ul class="multi-column-dropdown" *ngFor="let sub1Navigation of container">
+                                                    <li>
+                                                        <a class="dropdown-header" [href]="[firstNavigation.url + '/' + parentNavigation.url + '/' + sub1Navigation.url]">
+                                                            <b>{{sub1Navigation.getNavigationName()}}</b>
+                                                        </a>
+                                                    </li>
+                                                    <li class="orange-divider"></li>
+                                                    <li *ngFor="let sub2Navigation of productNavigations | navMenu:sub1Navigation.id">
+                                                        <a [href]="[firstNavigation.url + '/' + parentNavigation.url + '/' + sub1Navigation.url + '/' + sub2Navigation.url]">
+                                                            {{sub2Navigation.getNavigationName()}}
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li *ngIf="!isLastParentNavigation" class="divider"></li>
+                            </ng-container>
+                        </ul>
+                    </li>
+                    <li>
+                        <form class="navbar-form"></form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </ng-container>
+</div>

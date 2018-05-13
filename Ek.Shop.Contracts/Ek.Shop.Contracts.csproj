@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Commands\GetProductByUrlCommand.cs" />
+    <Compile Remove="Commands\SubmitCheckoutCommand.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Ek.Shop.Application\Ek.Shop.Application.csproj" />
+    <ProjectReference Include="..\Ek.Shop.Domain\Ek.Shop.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

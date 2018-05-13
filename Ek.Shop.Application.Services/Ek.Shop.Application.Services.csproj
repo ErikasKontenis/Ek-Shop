@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Categories\MergeCharacteristicQueryHandler.cs" />
+    <Compile Remove="Infrastructure\ClassifierBus.cs" />
+    <Compile Remove="Orders\SubmitCheckoutQueryHandler.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="6.2.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="2.0.3" />
+    <PackageReference Include="morelinq" Version="2.10.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Ek.Shop.Base.Application.Services\Ek.Shop.Base.Application.Services.csproj" />
+    <ProjectReference Include="..\Ek.Shop.Contracts\Ek.Shop.Contracts.csproj" />
+    <ProjectReference Include="..\Ek.Shop.Core\Ek.Shop.Core.csproj" />
+    <ProjectReference Include="..\Ek.Shop.Data\Ek.Shop.Data.csproj" />
+  </ItemGroup>
+
+</Project>

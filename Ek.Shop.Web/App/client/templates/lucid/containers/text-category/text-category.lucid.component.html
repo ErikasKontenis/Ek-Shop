@@ -1,0 +1,19 @@
+<!--<div class="container" *ngIf="category">
+    <div class="row">
+        <breadcrumb-lucid [navigations]="category.navigations"></breadcrumb-lucid>
+    </div>
+    <div class="row" *ngIf="category.getCharacteristic('description')" [innerHTML]="category.getCharacteristic('description')"></div>
+</div>-->
+
+<div class="container" *ngIf="category">
+    <div class="row">
+        <breadcrumb-lucid [navigations]="category.navigations"></breadcrumb-lucid>
+    </div>
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="container" *ngIf="category.getCharacteristic('description')" [innerHTML]="category.getCharacteristic('description')">
+
+            </div>
+        </div>
+    </div>
+</div>

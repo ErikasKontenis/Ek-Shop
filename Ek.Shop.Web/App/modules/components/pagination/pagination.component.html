@@ -1,0 +1,17 @@
+<ul class="pagination" *ngIf="field">
+    <li [ngClass]="{disabled:field.value == 1}">
+        <a (click)="onClick(1);">{{field.getCharacteristic('parameter')?.firstText}}</a>
+    </li>
+    <li [ngClass]="{disabled:field.value == 1}">
+        <a (click)="onClick(field.value - 1);">{{field.getCharacteristic('parameter')?.previousText}}</a>
+    </li>
+    <li *ngFor="let page of pager.pages" [ngClass]="{active:field.value == page}">
+        <a (click)="onClick(page);">{{page}}</a>
+    </li>
+    <li [ngClass]="{disabled:field.value == pager.totalPages}">
+        <a (click)="onClick(field.value + 1);">{{field.getCharacteristic('parameter')?.nextText}}</a>
+    </li>
+    <li [ngClass]="{disabled:field.value == pager.totalPages}">
+        <a (click)="onClick(pager.totalPages);">{{field.getCharacteristic('parameter')?.lastText}}</a>
+    </li>
+</ul>

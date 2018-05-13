@@ -1,0 +1,127 @@
+<div class="" *ngIf="category">
+    <div class="page-title">
+        <div class="title_left">
+            <h3>{{category.getCharacteristic('name')}}</h3>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <breadcrumb-admin [navigations]="category.navigations"></breadcrumb-admin>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a>Settings 1</a>
+                                </li>
+                                <li>
+                                    <a>Settings 2</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div *ngIf="data">
+                        <tabset>
+                            <tab heading="{{category.getFieldset('additionalInfo').getCharacteristic('name')}}">
+                                <span class="section"></span>
+                                <form class="form-horizontal form-label-left" novalidate>
+                                    <div class="item form-group" *ngFor="let item of category.getFieldset('additionalInfo').fields | keys">
+                                        <ng-container *ngIf="!item.value.getCharacteristic('isHidden')">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                                {{item.value.getLabel()}}
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <app-field [field]="item.value"></app-field>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                </form>
+                            </tab>
+                            <tab heading="{{category.getFieldset('billingInfo').getCharacteristic('name')}}">
+                                <span class="section"></span>
+                                <form class="form-horizontal form-label-left" novalidate>
+                                    <div class="item form-group" *ngFor="let item of category.getFieldset('billingInfo').fields | keys">
+                                        <ng-container *ngIf="!item.value.getCharacteristic('isHidden')">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                                {{item.value.getLabel()}}
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <app-field [field]="item.value"></app-field>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                </form>
+                            </tab>
+                            <tab heading="{{category.getFieldset('billingShippingInfo').getCharacteristic('name')}}">
+                                <span class="section"></span>
+                                <form class="form-horizontal form-label-left" novalidate>
+                                    <div class="item form-group" *ngFor="let item of category.getFieldset('billingShippingInfo').fields | keys">
+                                        <ng-container *ngIf="!item.value.getCharacteristic('isHidden')">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                                {{item.value.getLabel()}}
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <app-field [field]="item.value"></app-field>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                </form>
+                            </tab>
+                            <tab heading="{{category.getFieldset('basketInfo').getCharacteristic('name')}}">
+                                <span class="section"></span>
+                                <div class="table-responsive">
+                                    <table class="table table-striped jambo_table bulk_action">
+                                        <thead>
+                                            <tr class="headings">
+                                                <th>
+                                                </th>
+                                                <th class="column-title" *ngFor="let item of category.getFieldset('basketInfoTableHeader').fields | keys">
+                                                    <app-field [field]="item.value"></app-field>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let basketItem of data.order.basket.basketItems; let isOdd = odd; let isEven = even;" class="pointer" [ngClass]="{'odd': isOdd, 'even': isEven}">
+                                                <td></td>
+                                                <td>{{basketItem.product.getCharacteristic('name')}}</td>
+                                                <td>{{basketItem.quantity}}</td>
+                                                <td>{{basketItem.price | number : '1.2-2'}}€</td>
+                                                <td>{{basketItem.getTotalPrice() | number : '1.2-2'}}€</td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><b>{{data.order.basket.getTotalPrice() | number : '1.2-2'}}€</b></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </tab>
+                        </tabset>
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-3">
+                                <app-field [field]="category.getFieldset('orderFooterActions').getField('cancel')"></app-field>
+                                <app-field [field]="category.getFieldset('orderFooterActions').getField('save')"></app-field>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

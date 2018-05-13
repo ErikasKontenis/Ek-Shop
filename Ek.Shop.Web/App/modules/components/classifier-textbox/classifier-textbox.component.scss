@@ -1,0 +1,11 @@
+.searchbox-menu {
+    width: 100%;
+    text-overflow: ellipsis;
+}
+
+.searchbox-menu > li {
+    text-overflow: ellipsis;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+}

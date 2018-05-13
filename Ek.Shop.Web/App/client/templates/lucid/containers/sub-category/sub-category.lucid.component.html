@@ -1,0 +1,19 @@
+<div class="container" *ngIf="category">
+    <div class="row">
+        <breadcrumb-lucid [navigations]="category.navigations"></breadcrumb-lucid>
+        <div *ngIf="category.getCharacteristic('description')" class="cat-page-description" [innerHTML]="category.getCharacteristic('description')"></div>
+    </div>
+    <div class="row" style="margin-left: -30px;">
+        <div *ngFor="let subCategory of category.subCategories.items" class="col-sm-6 col-md-4 col-lg-3 text-center">
+            <div class="list-item">
+                <a [href]="[category.navigations.last().url + '/' + subCategory.url]" style="color: #333;">
+                    <div class="item-thumbnail">
+                        <img *ngIf="!subCategory.images?.length" class="img-cat" src="/Content/Uploads/0.gif" alt="{{subCategory.getCharacteristic('name')}}" />
+                        <img *ngIf="subCategory.images?.length" class="img-cat" src="/content/uploads/{{subCategory.images[0].url}}" alt="{{subCategory.images[0].getCharacteristic('name') || subCategory.getCharacteristic('name')}}" />
+                    </div>
+                    <h4 class="caption" style="height: 65px">{{subCategory.getCharacteristic('name')}}</h4> <!--TDOO: nuimk h4 nesamoningus ir uzdek klase-->
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

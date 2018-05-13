@@ -1,0 +1,14 @@
+@{
+    Layout = "_Layout";
+}
+
+<script src="~/dist/vendor.js" asp-append-version="true"></script>
+@*https://github.com/chymz/ng2-ckeditor/issues/90*@
+<script src="https://cdn.ckeditor.com/4.5.11/full/ckeditor.js"></script>
+
+@section scripts {
+    <!-- Our webpack bundle -->
+    <script src="~/dist/admin-app-browser.js" asp-append-version="true"></script>
+}
+
+<admin></admin>

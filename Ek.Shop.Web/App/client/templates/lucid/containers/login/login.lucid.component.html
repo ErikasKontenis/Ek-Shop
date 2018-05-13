@@ -1,0 +1,35 @@
+<div class="container" *ngIf="category">
+    <div class="row">
+        <breadcrumb-lucid [navigations]="category.navigations"></breadcrumb-lucid>
+    </div>
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h2>{{category.getCharacteristic('name')}}</h2>
+                <h4>{{category.getFieldset('login').getCharacteristic('name')}}</h4>
+                <hr />
+                <span *ngFor="let headerError of category.headerErrors" class="error">{{headerError}}</span>
+                <hr *ngIf="category.headerErrors?.length" />
+                <form class="form-horizontal" server-validate novalidate>
+                    <div class="col-sm-6 col-md-6">
+                        <div class="form-group" *ngFor="let item of category.getFieldset('login').fields | keys">
+                            <b class="col-md-3 control-label">{{item.value.getLabel()}}</b>
+                            <div class="col-md-6">
+                                <app-field [field]="item.value"></app-field>
+                            </div>
+                        </div>
+                    </div>
+                    <!--<div class="col-sm-6 col-md-6">
+                        <p><b>Prisijunkite naudodami socialinių tinklų paskyras.</b></p>
+                        <button class="btn btn-large btn-facebook btn-block" type="button"><i class="fa fa-facebook"></i> | Prisijungti su Facebook</button>
+                        <button class="btn btn-large btn-google-plus btn-block" type="button"><i class="fa fa-google-plus"></i> | Prisijungti su Google+</button>
+                        <br />
+                        <p><b>Arba susikurkite paskyrą mūsų sistemoje. Registracija užtruks tik minutę.</b></p>
+                        <a class="btn btn-large btn-kp btn-block" href="/user/registration"><i class="fa fa-google-plus"></i> | Registruotis</a>
+                    </div>-->
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<p *ngIf="!category"><em>Loading...</em></p>

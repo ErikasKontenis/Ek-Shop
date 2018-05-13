@@ -1,0 +1,92 @@
+<div class="" *ngIf="category">
+    <div class="page-title">
+        <div class="title_left">
+            <h3>{{category.getCharacteristic('name')}}</h3>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <breadcrumb-admin [navigations]="category.navigations"></breadcrumb-admin>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a>Settings 1</a>
+                                </li>
+                                <li>
+                                    <a>Settings 2</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div *ngIf="data">
+                        <tabset>
+                            <tab heading="{{category.getFieldset('productInfo').getCharacteristic('name')}}">
+                                <span class="section"></span>
+                                <form class="form-horizontal form-label-left" novalidate>
+                                    <div class="item form-group" *ngFor="let item of category.getFieldset('productInfo').fields | keys">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                            {{item.value.getLabel()}}
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <app-field [field]="item.value"></app-field>
+                                            <html-editor-admin [field]="item.value" *ngIf="item.value.getCharacteristic('fieldType') == 'HtmlEditor'"></html-editor-admin>
+                                        </div>
+                                    </div>
+                                    <div class="divider-dashed"></div>
+                                    <h3>{{category.getFieldset('productAdditionalInfo').getCharacteristic('name')}}</h3>
+                                    <div class="item form-group" *ngFor="let item of category.getFieldset('productAdditionalInfo').fields | keys">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                            {{item.value.getLabel()}}
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <app-field [field]="item.value"></app-field>
+                                        </div>
+                                    </div>
+                                    <div class="divider-dashed"></div>
+                                    <file-upload-admin [(images)]="data.product.images"></file-upload-admin>
+                                </form>
+                            </tab>
+                            <tab heading="{{category.getFieldset('productSeo').getCharacteristic('name')}}">
+                                <span class="section"></span>
+                                <form class="form-horizontal form-label-left" novalidate>
+                                    <div class="item form-group" *ngFor="let item of category.getFieldset('productSeo').fields | keys">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                            {{item.value.getLabel()}}
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <app-field [field]="item.value"></app-field>
+                                            <html-editor-admin [field]="item.value" *ngIf="item.value.getCharacteristic('fieldType') == 'HtmlEditor'"></html-editor-admin>
+                                        </div>
+                                    </div>
+                                </form>
+                            </tab>
+                            <tab heading="{{category.getFieldset('productInputFields').getCharacteristic('name')}}">UI Elements</tab>
+                        </tabset>
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-3">
+                                <app-field [field]="category.getFieldset('footerActions').getField('delete')"></app-field>
+                                <app-field [field]="category.getFieldset('footerActions').getField('cancel')"></app-field>
+                                <app-field [field]="category.getFieldset('footerActions').getField('save')"></app-field>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

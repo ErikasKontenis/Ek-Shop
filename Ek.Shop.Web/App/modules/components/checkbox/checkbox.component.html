@@ -1,0 +1,9 @@
+<div class="checkbox">
+    <label>
+        <input type="checkbox"
+               [(ngModel)]="field.value"
+               (change)="onClick()"
+               (blur)="onBlur()"
+               [disabled]="field.getCharacteristic('isDisabled')" />
+    </label>
+</div>

@@ -1,0 +1,19 @@
+<div class="form-group">
+    <label class="col-xs-12 col-sm-12">{{field.getCharacteristic('name')}}</label>
+    <div class="col-xs-4 col-sm-4">
+        <div class="input-group">
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-danger" (click)="onMinusClick()">
+                    <span class="glyphicon glyphicon-minus"></span>
+                </button>
+            </span>
+            <input type="number" [(ngModel)]="field.value" (blur)="onBlur()" class="form-control input-number" style="min-width:100px;">
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-success" (click)="onPlusClick()">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </button>
+            </span>
+        </div>
+        <span class="help-block data-error" *ngIf="field.message">{{field.message}}</span>
+    </div>
+</div>

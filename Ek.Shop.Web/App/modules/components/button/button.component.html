@@ -1,0 +1,30 @@
+<!-- Add button to template to prevent dublicating html -->
+<ng-container *ngIf="field.getCharacteristic('url')">
+    <a [href]="field.getCharacteristic('url')">
+        <input type="submit"
+               value="{{field.getCharacteristic('name')}}"
+               [ngClass]="field.getCharacteristic('primaryCssClass')"
+               [disabled]="field.getCharacteristic('isDisabled')"
+               (click)="onClick()"
+               mwlConfirmationPopover
+               [isDisabled]="!field.getCharacteristic('isYesNoPopoverRequired')"
+               [popoverTitle]="field.getCharacteristic('popoverTitle')"
+               [popoverMessage]="field.getCharacteristic('popoverMessage')"
+               [focusButton]="field.getCharacteristic('popoverFocusButton')"
+               (confirm)="onSuccessClick()" />
+    </a>
+</ng-container>
+<ng-container *ngIf="!field.getCharacteristic('url')">
+    <input type="submit"
+           value="{{field.getCharacteristic('name')}}"
+           [ngClass]="field.getCharacteristic('primaryCssClass')"
+           [disabled]="field.getCharacteristic('isDisabled')"
+           (click)="onClick()"
+           mwlConfirmationPopover
+           [isDisabled]="!field.getCharacteristic('isYesNoPopoverRequired')"
+           [popoverTitle]="field.getCharacteristic('popoverTitle')"
+           [popoverMessage]="field.getCharacteristic('popoverMessage')"
+           [focusButton]="field.getCharacteristic('popoverFocusButton')"
+           (confirm)="onSuccessClick()" />
+</ng-container>
+<span class="help-block data-error" *ngIf="field.message">{{field.message}}</span>

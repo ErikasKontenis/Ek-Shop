@@ -1,0 +1,75 @@
+<div class="container" *ngIf="category">
+    <div class="row">
+        <div *ngIf="category.getCharacteristic('description')" class="cat-page-description" [innerHTML]="category.getCharacteristic('description')"></div>
+    </div>
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="container">
+                <h2>{{category.getCharacteristic('name')}}</h2>
+                <tabset *ngIf="profile">
+                    <tab heading="{{category.getFieldset('userInfo').getCharacteristic('name')}}">
+                        <fieldset>
+                            <legend></legend>
+                            <form class="form-horizontal" server-validate novalidate>
+                                <div class="col-sm-6 col-md-6">
+                                    <div class="form-group" *ngFor="let item of category.getFieldset('userInfo').fields | keys">
+                                        <ng-container *ngIf="!item.value.getCharacteristic('isHidden')">
+                                            <b class="col-md-3 control-label">{{item.value.getLabel()}}</b>
+                                            <div class="col-md-6">
+                                                <app-field [field]="item.value"></app-field>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                    <div class="form-group" *ngFor="let item of category.getFieldset('userFooterActions').fields | keys">
+                                        <ng-container *ngIf="!item.value.getCharacteristic('isHidden')">
+                                            <b class="col-md-3 control-label">{{item.value.getLabel()}}</b>
+                                            <div class="col-md-6">
+                                                <app-field [field]="item.value"></app-field>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-6">
+                                    <div class="form-group" *ngFor="let item of category.getFieldset('userShippingInfo').fields | keys">
+                                        <ng-container *ngIf="!item.value.getCharacteristic('isHidden')">
+                                            <b class="col-md-3 control-label">{{item.value.getLabel()}}</b>
+                                            <div class="col-md-6">
+                                                <app-field [field]="item.value"></app-field>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </form>
+                        </fieldset>
+                    </tab>
+                    <tab heading="{{category.getFieldset('orders').getCharacteristic('name')}}">
+                        <div *ngIf="!profile?.orders?.totalCount">Jūs neturite jokių užsakymų.</div>
+                        <h4></h4>
+                        <div style="overflow-x:auto">
+                            <table class="table" *ngFor="let order of profile.orders.items">
+                                <thead>
+                                    <tr style="background-color: #3e4c66;color: #FFF;">
+                                        <th style="width:30%">Užsakymo numeris: <b>{{order.id}}</b></th>
+                                        <th style="width:20%">Statusas: <b>{{order.orderStatus}}</b></th>
+                                        <th style="width:25%">Sukurtas: <b>{{order.createdOn | date: 'yyyy-MM-dd HH:mm:ss'}}</b></th>
+                                        <th style="width:15%">Pristatymas: <b>{{order.shippingMethod}}</b></th>
+                                        <th class="text-right">Užsakymo suma: <b>{{order.totalPrice | number : '1.2-2'}}</b></th>
+                                    </tr>
+                                </thead>
+                                <tbody *ngFor="let basketItem of order.basket.basketItems">
+                                    <tr>
+                                        <td style="width:50%"><a [href]="basketItem.product?.url || ''">{{basketItem.product?.getCharacteristic('name') || 'Produktas nebeegzistuoja'}}</a></td>
+                                        <td style="width:16%" class="text-right"><a [href]="basketItem.product?.url || ''">{{basketItem.quantity}} vnt.</a></td>
+                                        <td style="width:16%"></td>
+                                        <td style="width:16%"></td>
+                                        <td class="text-right"><a [href]="basketItem.product?.url || ''">{{basketItem?.getTotalPrice() | number : '1.2-2'}} €</a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </tab>
+                </tabset>
+            </div>
+        </div>
+    </div>
+</div>

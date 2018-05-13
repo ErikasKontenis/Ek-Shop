@@ -1,0 +1,25 @@
+<div class="container">
+    <footer class="footer">
+        <div class="container" *ngIf="footerNavigations">
+            <div class="col-md-4" style="margin-top: 20px">
+                <img class="img-responsive" src="/Content/Uploads/Web/kanceliarineparduotuve2.png" alt="kanceliarine parduotuve" style="margin-bottom: 10px" />
+                <div class="footer-font">&copy; {{dateNow | date: 'yyyy'}} Visos teisės saugomos.<br />Kanceliarineparduotuve.lt</div>
+            </div>
+            <div class="col-md-4 footer-font" style="margin-top: 85px;">
+                <ng-container *ngFor="let parentNavigation of footerNavigations">
+                    <ng-container *ngFor="let navigation of footerNavigations | navMenu:parentNavigation.id">
+                        <a [href]="[parentNavigation.url + '/' + navigation.url]" title="{{navigation.getNavigationName()}}">
+                            {{navigation.getNavigationName()}}
+                        </a>
+                        <br />
+                    </ng-container>
+                </ng-container>
+            </div>
+            <div class="col-md-4" style="margin-top: 85px">
+                <a href="https://www.facebook.com/kanceliarineparduotuve.lt"><img src="/Content/Uploads/Web/fb.png" alt="facebook tinklalapis" /></a>
+                <a href="https://plus.google.com/116413762820949807026"><img src="/Content/Uploads/Web/google.png" alt="google tinklalapis" /></a>
+            </div>
+        </div>
+        <br /><br />
+    </footer>
+</div>

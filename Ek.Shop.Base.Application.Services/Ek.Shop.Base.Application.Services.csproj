@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Ek.Shop.Base.Data\Ek.Shop.Base.Data.csproj" />
+    <ProjectReference Include="..\Ek.Shop.Contracts\Ek.Shop.Contracts.csproj" />
+    <ProjectReference Include="..\Ek.Shop.Domain\Ek.Shop.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

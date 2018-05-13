@@ -1,0 +1,45 @@
+<div class="container" *ngIf="category">
+    <div class="row">
+        <div *ngIf="category.getCharacteristic('description')" class="cat-page-description" [innerHTML]="category.getCharacteristic('description')"></div>
+    </div>
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="container">
+                <h2>{{category.getCharacteristic('name')}}</h2>
+                <div *ngIf="basket && !basket?.basketItems?.length">Jūsų krepšelis tuščias</div>
+                <ng-container *ngIf="basket?.basketItems?.length > 0">
+                    <table class="table basket-table">
+                        <thead>
+                            <tr>
+                                <th>Pavadinimas</th>
+                                <th class="text-right">Kiekis</th>
+                                <th class="text-right">Vnt. kaina</th>
+                                <th class="text-right">Kaina</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let basketItem of basket.basketItems">
+                                <td><a [href]="basketItem.product.url">{{basketItem.product.getCharacteristic('name')}}</a></td>
+                                <td class="text-right"><a [href]="basketItem.product.url">{{basketItem.quantity}}</a></td>
+                                <td class="text-right"><a [href]="basketItem.product.url">{{basketItem.price | number : '1.2-2'}}€</a></td>
+                                <td class="text-right"><a [href]="basketItem.product.url">{{basketItem.getTotalPrice() | number : '1.2-2'}}€</a></td>
+                                <td><button class="btn btn-link btn-xs" (click)="deleteBasketItem(basketItem.id)"><span class="glyphicon glyphicon-trash"></span></button></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="text-right"><b>Viso: {{basket.getTotalPrice() | number : '1.2-2'}}€</b></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div *ngFor="let item of category.getFieldset('footerActions').fields | keys" style="margin-bottom: 5px;">
+                        <app-field [field]="item.value"></app-field>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>

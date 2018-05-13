@@ -1,0 +1,54 @@
+<div class="container" *ngIf="product">
+    <div class="row">
+        <breadcrumb-lucid [navigations]="product.navigations"></breadcrumb-lucid>
+    </div>
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <fieldset>
+                    <div class="col-sm-6 col-md-4 col-lg-3">
+                        <img *ngIf="!product.images?.length" class="product-image" src="/Content/Uploads/0.gif" alt="{{product.getCharacteristic('name')}}" />
+                        <carousel *ngIf="product.images?.length" [interval]="0">
+                            <slide *ngFor="let image of product.images | callback: filterSmallSizeImages" [active]="image.active">
+                                <img class="product-image" src="/Content/Uploads/{{image.url}}" alt="{{image.getCharacteristic('name') || product.getCharacteristic('name')}}">
+                            </slide>
+                        </carousel>
+                    </div>
+                    <div class="col-sm-6 col-md-8 col-lg-9">
+                        <div class="form-group">
+                            <div class="col-sm-6">
+                                <h1 class="pav">{{product.getCharacteristic('name')}}</h1>
+                                <span class="small-green-font">Prekės kodas: {{product.id}}</span>
+                            </div>
+                        </div>
+                        <div itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
+                            <meta itemprop="priceCurrency" content="EUR">
+                            <meta itemprop="price" content="{{product.getTotalPrice() | number : '1.2-2'}}">
+                            <div *ngIf="!product.discount" class="form-group">
+                                <h3 class="col-sm-12 amount"><b>{{product.price | number : '1.2-2'}}</b> €</h3>
+                            </div>
+                            <div *ngIf="product.discount" class="form-group">
+                                <div class="col-sm-12 amount">
+                                    <h3 style="color:red;"><b>{{product.getTotalPrice() | number : '1.2-2'}}</b> €</h3>
+                                    <h5><s>{{product.price | number : '1.2-2'}}</s> €</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <app-increasing-textbox [field]="product.getFieldset('baseProductBody').getField('quantity')"></app-increasing-textbox>
+                        <div class="row"></div>
+                        <div class="form-group">
+                            <div class="col-xs-12 col-sm-4">
+                                <span class="help-block data-error"></span>
+                                <app-button [field]="product.getFieldset('baseProductBody').getField('basketAdd')"></app-button>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Aprašymas</legend>
+                    <span class="product-description" [innerHTML]="product.getCharacteristic('description')"></span>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+</div>

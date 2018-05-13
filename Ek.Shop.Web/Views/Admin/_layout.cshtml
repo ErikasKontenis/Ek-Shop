@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <base href="@(Url.Content("~/"))" />
+    <title>Admin</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="~/content/bootstrap.min.css" rel="stylesheet">
+    <link href="~/content/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/content/admin.min.css" />
+</head>
+<body class="nav-md">
+    @RenderBody()
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>    
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="6.2.1" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.7.0" />
+    <PackageReference Include="Moq" Version="4.8.2" />
+    <PackageReference Include="MSTest.TestAdapter" Version="1.3.0" />
+    <PackageReference Include="MSTest.TestFramework" Version="1.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{82a7f48d-3b50-4b1e-b82e-3ada8210c358}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Ek.Shop.Application.Services\Ek.Shop.Application.Services.csproj" />
+    <ProjectReference Include="..\Ek.Shop.Application\Ek.Shop.Application.csproj" />
+    <ProjectReference Include="..\Ek.Shop.Data\Ek.Shop.Data.csproj" />
+    <ProjectReference Include="..\Ek.Shop.Domain\Ek.Shop.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,39 @@
+<!-- sidebar menu -->
+<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+    <div class="menu_section" *ngIf="firstNavigation">
+        <ul class="nav side-menu">
+            <li>
+                <a [href]="[firstNavigation.url]" (click)="activeTabIndex = -1"><i [ngClass]="firstNavigation.getCharacteristic('iconClass')"></i> {{firstNavigation.getNavigationName()}}</a>
+            </li>
+            <ng-container *ngFor="let parentNavigation of leftNavigations | navMenu:firstNavigation.id; let last = last; let index = index">
+                <li (click)="activeTabIndex = index" [ngClass]="{active: index === activeTabIndex}">
+                    <a><i [ngClass]="parentNavigation.getCharacteristic('iconClass')"></i> {{parentNavigation.getNavigationName()}} <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu"[style.display]="index === activeTabIndex ? 'block': 'none'">
+                        <li *ngFor="let subNavigation of leftNavigations | navMenu:parentNavigation.id">
+                            <a [href]="[firstNavigation.url + '/' + parentNavigation.url + '/' + subNavigation.url]">
+                                {{subNavigation.getNavigationName()}}
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ng-container>
+        </ul>
+    </div>
+</div>
+<!-- /sidebar menu -->
+<!-- /menu footer buttons -->
+<div class="sidebar-footer hidden-small">
+    <a data-toggle="tooltip" data-placement="top" title="Back to the shop">
+        <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+    </a>
+    <a data-toggle="tooltip" data-placement="top" title="System Settings">
+        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+    </a>
+    <a data-toggle="tooltip" data-placement="top" title="User Profile">
+        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+    </a>
+    <a [href]="'admin/logout'" data-toggle="tooltip" data-placement="top" title="Logout">
+        <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+    </a>
+</div>
+<!-- /menu footer buttons -->

@@ -1,0 +1,5 @@
+<label *ngFor="let item of field.items" id="{{item.value}}">
+    <input type="radio" name="{{field.id}}" (click)="onSelectClick(item)" [disabled]="field.getCharacteristic('isDisabled')" />
+    {{item.text}}
+</label>
+<div class="help-block data-error" *ngIf="field.message && field.items?.length">{{field.message}}</div>

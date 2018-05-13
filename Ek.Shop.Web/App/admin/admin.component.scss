@@ -1,0 +1,68 @@
+/* Import Bootstrap & Fonts */
+$icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
+@import "~ngx-toastr/toastr";
+
+
+
+/* *** Overall APP Styling can go here ***
+   --------------------------------------------
+   Note: This Component has ViewEncapsulation.None so the styles will bleed out
+
+*/
+
+/*new css*/
+
+.navigation > span + span:before {
+    color: #ccc;
+    content: "»";
+    padding: 0 5px;
+}
+
+.navigation > span + span:last-child {
+    font-weight: bold;
+}
+
+.dropdown-menu:not(.searchbox-menu) {
+    margin: 8px 0 0;
+}
+
+#content form .submit, .login_content form input[type=submit] {
+    margin-left: 0px;
+}
+
+.image-preview-icon {
+    width: 100px;
+    height: 100px;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+@media screen and (min-width: 480px) {
+    .pagination-button {
+        margin-top: 20px
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .pagination-button {
+        margin-top: -40px
+    }
+}
+
+.pagination-fieldset {
+    margin-left: -10px;
+    margin-top: -20px;
+}
+
+.pagination-field {
+    float: left;
+    width: auto;
+}
+
+.float-right {
+    float: right;
+}
+
+.float-left {
+    float: left;
+}

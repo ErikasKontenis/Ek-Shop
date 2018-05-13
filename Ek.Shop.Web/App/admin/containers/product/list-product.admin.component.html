@@ -1,0 +1,85 @@
+<div class="" *ngIf="category">
+    <div class="page-title">
+        <div class="title_left">
+            <h3>{{category.getCharacteristic('name')}}</h3>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <breadcrumb-admin [navigations]="category.navigations"></breadcrumb-admin>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a>Settings 1</a>
+                                </li>
+                                <li>
+                                    <a>Settings 2</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content" *ngIf="pagedList && pagedList.items">
+                    <form class="form-horizontal form-label-left" novalidate>
+                        <div class="form-group">
+                            <div class="item form-group">
+                                <div class="row">
+                                    <div class="col-sm-6" *ngFor="let item of category.getFieldset('categoryHeaderLeft').fields | keys">
+                                        <searchbox-admin [field]="item.value" *ngIf="item.value.getCharacteristic('fieldType') == 'Searchbox'"></searchbox-admin>
+                                    </div>
+                                    <div class="col-sm-6" *ngFor="let item of category.getFieldset('categoryHeaderRight').fields | keys">
+                                        <app-field [field]="item.value"></app-field>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="table-responsive">
+                        <table class="table table-striped jambo_table bulk_action">
+                            <thead>
+                                <tr class="headings">
+                                    <th>
+                                    </th>
+                                    <th class="column-title" *ngFor="let item of category.getFieldset('primaryTableHeader').fields | keys">
+                                        <app-field [field]="item.value"></app-field>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of pagedList.items; let isOdd = odd; let isEven = even;" class="pointer" [ngClass]="{'odd': isOdd, 'even': isEven}">
+                                    <td></td>
+                                    <td class="navigation">
+                                        <span>{{item.getCharacteristic('name')}}</span>
+                                    </td>
+                                    <td class=" "><span [ngClass]="item.getCharacteristic('isDisabled') ? 'fa fa-close' : 'fa fa-check'"></span></td>
+                                    <td class=" last">
+                                        <span *ngFor="let field of category.getFieldset('primaryTableActions').fields | keys">
+                                            <a [href]="[field.value.getCharacteristic('url') + '/' + item.id]">{{field.value.getCharacteristic('name')}}</a>
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="form-group pagination-fieldset">
+                        <div class="item form-group col-md-6 pagination-field" *ngFor="let item of category.getFieldset('categoryPagination').fields | keys">
+                            <app-field [field]="item.value"></app-field>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
