@@ -9,7 +9,7 @@
     <UserSecretsId>f8b84cd3-dc4e-4dbd-b97c-4b06157afb0d</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
-	<PackageReference Include="AutoMapper" Version="6.2.1" />
+	<PackageReference Include="AutoMapper" Version="6.2.2" />
 	<PackageReference Include="CacheManager.Core" Version="1.1.2" />
 	<PackageReference Include="CacheManager.Microsoft.Extensions.Configuration" Version="1.1.2" />
 	<PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.8" />
