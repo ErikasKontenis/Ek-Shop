@@ -27,8 +27,6 @@ namespace Ek.Shop.Data.Categories
             _cache = cache;
         }
 
-        public override bool IsCacheRequired => false;
-
         public override async Task<Category> Query(DeleteCategoryCommand command)
         {
             var category = await DbContext.Categories.Include(o => o.Route).FirstOrDefaultAsync(o => o.Id == command.CategoryId);

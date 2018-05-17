@@ -18,8 +18,6 @@ namespace Ek.Shop.Data.Products
             : base (dbContext)
         { }
 
-        public override string CacheRegion => CacheRegions.Product;
-
         public override async Task<PagedList<Product>> Query(ListProductsByCategoryCommand command)
         {
             var includableQueryable = DbContext.Products

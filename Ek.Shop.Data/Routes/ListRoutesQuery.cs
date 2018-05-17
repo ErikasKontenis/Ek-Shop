@@ -15,8 +15,6 @@ namespace Ek.Shop.Data.Routes
             : base (dbContext)
         { }
 
-        public override bool IsCacheRequired => false;
-
         public override async Task<List<Route>> Query(ListRoutesCommand command)
         {
             var query = DbContext.Routes

@@ -3,7 +3,6 @@ using Ek.Shop.Base.Data.DbContexts;
 using Ek.Shop.Base.Data.Queries.Queries;
 using Ek.Shop.Base.Data.Queries.RemoteQueries;
 using Ek.Shop.Contracts.Commands;
-using Ek.Shop.Core.Enums;
 using Ek.Shop.Domain.Categories;
 using Ek.Shop.Domain.Products;
 using Microsoft.EntityFrameworkCore;
@@ -24,8 +23,6 @@ namespace Ek.Shop.Data.Products
         {
             _getCategoryBaseQuery = getCategoryBaseQuery;
         }
-
-        public override string CacheRegion => CacheRegions.Product;
 
         public override async Task<Product> Query(GetProductCommand command)
         {

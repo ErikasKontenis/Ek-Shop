@@ -26,8 +26,6 @@ namespace Ek.Shop.Data.Categories
             _workContext = workContext;
         }
 
-        public override string CacheRegion => CacheRegions.Category;
-
         public override async Task<Category> Query(GetCategoryCommand command)
         {
             var categoriesQuery = _categoryBaseQuery.Execute(command);

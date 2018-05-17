@@ -20,8 +20,6 @@ namespace Ek.Shop.Data.Products
             _cache = cache;
         }
 
-        public override bool IsCacheRequired => false;
-
         public override async Task<Product> Query(SaveProductQueryCommand command)
         {
             DbContext.AddOrUpdate(command.Product);

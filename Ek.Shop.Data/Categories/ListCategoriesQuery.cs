@@ -17,8 +17,6 @@ namespace Ek.Shop.Data.Categories
             : base(dbContext)
         { }
 
-        public override string CacheRegion => CacheRegions.Category;
-
         public override async Task<PagedList<Category>> Query(ListCategoriesCommand command)
         {
             // ServerSide paging of category list is doing in query handler only because it is too difficult to properly form navigations

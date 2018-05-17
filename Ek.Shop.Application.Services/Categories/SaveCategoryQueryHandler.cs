@@ -68,7 +68,10 @@ namespace Ek.Shop.Application.Services.Categories
 
             var classifierStore = await _classifierStoresRepository.Get();
             var availableCharacteristics = await _listCharacteristicsQuery.Query(new ListCharacteristicsCommand());
-            var category = await _getCategoryQuery.Query(new GetCategoryCommand(command.SaveCategory.Category.Id, command.LanguageId, true)) ?? new Category();
+            var category = await _getCategoryQuery.Query(new GetCategoryCommand(command.SaveCategory.Category.Id, command.LanguageId, true)
+            {
+                IsFromCache = false
+            }) ?? new Category();
             var categoryDto = command.SaveCategory.Category;
             categoryDto = await CategoryDtoDefaults(categoryDto);
 

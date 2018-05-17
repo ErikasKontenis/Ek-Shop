@@ -26,8 +26,6 @@ namespace Ek.Shop.Data.Baskets
             _userManager = userManager;
         }
 
-        public override bool IsCacheRequired => false;
-
         public override async Task<Basket> Query(CreateOrGetUnconfirmedBasketCommand command)
         {
             var user = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);

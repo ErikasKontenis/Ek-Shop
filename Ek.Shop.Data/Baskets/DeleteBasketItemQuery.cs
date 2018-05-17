@@ -20,8 +20,6 @@ namespace Ek.Shop.Data.Baskets
             _createOrGetUnconfirmedBasketQuery = createOrGetUnconfirmedBasketQuery;
         }
 
-        public override bool IsCacheRequired => false;
-
         public override async Task<BasketItem> Query(DeleteBasketItemCommand command)
         {
             var basket = await _createOrGetUnconfirmedBasketQuery.Query(new CreateOrGetUnconfirmedBasketCommand());

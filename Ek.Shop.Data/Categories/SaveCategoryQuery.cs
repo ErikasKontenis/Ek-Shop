@@ -20,8 +20,6 @@ namespace Ek.Shop.Data.Categories
             _cache = cache;
         }
 
-        public override bool IsCacheRequired => false;
-
         public override async Task<Category> Query(SaveCategoryQueryCommand command)
         {
             DbContext.AddOrUpdate(command.Category);

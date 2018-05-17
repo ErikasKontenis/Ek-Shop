@@ -21,8 +21,6 @@ namespace Ek.Shop.Data.Products
             _cache = cache;
         }
 
-        public override bool IsCacheRequired => false;
-
         public override async Task<Product> Query(DeleteProductCommand command)
         {
             var product = await DbContext.Products.Include(o => o.Route).FirstOrDefaultAsync(o => o.Id == command.ProductId);

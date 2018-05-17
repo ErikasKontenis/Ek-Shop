@@ -7,6 +7,7 @@ using Ek.Shop.Base.Data.DbContexts;
 using Ek.Shop.Base.Data.Queries.Queries;
 using Ek.Shop.Base.Data.Queries.RemoteQueries;
 using Ek.Shop.Base.Data.WorkContexts;
+using Ek.Shop.Contracts.Abstractions;
 using Ek.Shop.Data.Baskets;
 using Ek.Shop.Data.Categories;
 using Ek.Shop.Data.ClassifierStores;
@@ -293,8 +294,9 @@ namespace AspCoreServer
             container.Register(typeof(IQuery<,>), new[] { typeof(GetCategoryBaseQuery).Assembly });
 
             // TODO: Temporary do not cache any queries because of lost EF model reference and impossibility to track decorated query model-result. 
-            //container.RegisterDecorator(typeof(IRemoteQuery<,>),
-            //    typeof(RemoteQueryCacheDecorator<,>));
+            container.RegisterDecorator(typeof(IRemoteQuery<,>),
+                typeof(RemoteQueryCacheDecorator<,>),
+                context => typeof(CachingCommand).IsAssignableFrom(context.ServiceType.GetGenericArguments()[0]));
 
             // TODO: Refactor to use simpleInjector UseMiddleware
             container.Register<WorkContextMiddleware>();

@@ -69,7 +69,10 @@ namespace Ek.Shop.Application.Services.Products
 
             var classifierStore = await _classifierStoresRepository.Get();
             var availableCharacteristics = await _listCharacteristicsQuery.Query(new ListCharacteristicsCommand());
-            var product = await _getProductQuery.Query(new GetProductCommand(command.SaveProduct.Product.Id, command.LanguageId)) ?? new Product();
+            var product = await _getProductQuery.Query(new GetProductCommand(command.SaveProduct.Product.Id, command.LanguageId)
+            {
+                IsFromCache = false
+            }) ?? new Product();
             var productDto = command.SaveProduct.Product;
 
             _mapper.Map(productDto, product);

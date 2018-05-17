@@ -14,8 +14,6 @@ namespace Ek.Shop.Data.Orders
             : base (dbContext)
         { }
 
-        public override bool IsCacheRequired => false;
-
         public override async Task<Order> Query(GetOrderCommand command)
         {
             var query = DbContext.Orders

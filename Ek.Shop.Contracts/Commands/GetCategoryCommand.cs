@@ -1,6 +1,9 @@
-﻿namespace Ek.Shop.Contracts.Commands
+﻿using Ek.Shop.Contracts.Abstractions;
+using Ek.Shop.Core.Enums;
+
+namespace Ek.Shop.Contracts.Commands
 {
-    public class GetCategoryCommand : ICommand
+    public class GetCategoryCommand : CachingCommand
     {
         public GetCategoryCommand()
         { }
@@ -17,5 +20,7 @@
         public bool IsDisabledIncluded { get; set; }
 
         public int LanguageId { get; set; }
+
+        public override string Region => CacheRegions.Category;
     }
 }

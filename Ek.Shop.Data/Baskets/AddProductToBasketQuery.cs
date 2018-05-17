@@ -27,8 +27,6 @@ namespace Ek.Shop.Data.Baskets
             _workContext = workContext;
         }
 
-        public override bool IsCacheRequired => false;
-
         public override async Task<Basket> Query(AddProductToBasketCommand command)
         {
             var product = await _getProductQuery.Query(new GetProductCommand(command.ProductId, _workContext.WorkingLanguageId));
