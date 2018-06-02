@@ -15,7 +15,7 @@ if (module['hot']) {
     });
 } else {
     modulePromise.then(() => {
-        if ('service-worker' in navigator) {
+        if (navigator.hasOwnProperty('service-worker')) {
             navigator.serviceWorker.register('/ngsw-worker.js')
         }
     }).catch(err => console.log(err));

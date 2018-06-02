@@ -14,15 +14,17 @@ const merge = require('webpack-merge');
 const AngularCompilerPlugin = require('@ngtools/webpack').AngularCompilerPlugin;
 const CheckerPlugin = require('awesome-typescript-loader').CheckerPlugin;
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const { sharedModuleRules } = require('./webpack.additions');
 
 module.exports = (env) => {
     // Configuration in common to both client-side and server-side bundles
     const isDevBuild = !(env && env.prod);
     const sharedConfig = {
+        mode: isDevBuild ? "development" : "production",
         stats: { modules: false },
         context: __dirname,
-        resolve: { extensions: ['.js', '.ts'] },
+        resolve: { extensions: [ '.js', '.ts' ] },
         output: {
             filename: '[name].js',
             publicPath: 'dist/' // Webpack dev middleware, if enabled, handles requests for this URL prefix
@@ -57,23 +59,32 @@ module.exports = (env) => {
                 moduleFilenameTemplate: path.relative(clientSideBundleOutputDir, '[resourcePath]') // Point sourcemap entries to the original file locations on disk
             })
         ] : [
-                // new BundleAnalyzerPlugin(),
                 // Plugins that apply in production builds only
                 new AngularCompilerPlugin({
                     mainPath: path.join(__dirname, 'App/client-boot.browser.ts'),
                     tsConfigPath: './tsconfig.json',
                     entryModule: path.join(__dirname, 'App/client/client.module.browser#ClientModule'),
                     exclude: ['./**/*.server.ts']
-                }),
-                new webpack.optimize.UglifyJsPlugin({
-                    output: {
-                        ascii_only: true,
-                    }
-                }),
+                })
             ]),
         devtool: isDevBuild ? 'cheap-eval-source-map' : false,
         node: {
             fs: "empty"
+        },
+        optimization: {
+            minimizer: [].concat(isDevBuild ? [] : [
+                // we specify a custom UglifyJsPlugin here to get source maps in production
+                new UglifyJsPlugin({
+                    cache: true,
+                    parallel: true,
+                    uglifyOptions: {
+                        compress: false,
+                        ecma: 6,
+                        mangle: true
+                    },
+                    sourceMap: true
+                })
+            ])
         }
     });
 
@@ -98,16 +109,26 @@ module.exports = (env) => {
                     tsConfigPath: './tsconfig.json',
                     entryModule: path.join(__dirname, 'App/admin/admin.module.browser#AdminModule'),
                     exclude: ['./**/*.server.ts']
-                }),
-                new webpack.optimize.UglifyJsPlugin({
-                    output: {
-                        ascii_only: true,
-                    }
-                }),
+                })
             ]),
         devtool: isDevBuild ? 'cheap-eval-source-map' : false,
         node: {
             fs: "empty"
+        },
+        optimization: {
+            minimizer: [].concat(isDevBuild ? [] : [
+                // we specify a custom UglifyJsPlugin here to get source maps in production
+                new UglifyJsPlugin({
+                    cache: true,
+                    parallel: true,
+                    uglifyOptions: {
+                        compress: false,
+                        ecma: 6,
+                        mangle: true
+                    },
+                    sourceMap: true
+                })
+            ])
         }
     });
 
@@ -140,7 +161,7 @@ module.exports = (env) => {
                     mangle: false,
                     compress: false,
                     output: {
-                        ascii_only: true,
+                        ascii_only: true
                     }
                 }),
                 // Plugins that apply in production builds only
@@ -156,7 +177,22 @@ module.exports = (env) => {
             path: path.join(__dirname, './App/dist')
         },
         target: 'node',
-        devtool: isDevBuild ? 'cheap-eval-source-map' : false
+        devtool: isDevBuild ? 'cheap-eval-source-map' : false,
+        optimization: {
+            minimizer: [].concat(isDevBuild ? [] : [
+                // we specify a custom UglifyJsPlugin here to get source maps in production
+                new UglifyJsPlugin({
+                    cache: true,
+                    parallel: true,
+                    uglifyOptions: {
+                        compress: false,
+                        ecma: 6,
+                        mangle: true
+                    },
+                    sourceMap: true
+                })
+            ])
+        }
     });
 
     return [clientBrowserBundleConfig, adminBrowserBundleConfig, clientServerBundleConfig];

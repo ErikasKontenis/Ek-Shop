@@ -27,4 +27,3 @@ import 'rxjs/add/observable/interval';
 import 'rxjs/add/observable/fromPromise';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/concat';
-

@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ORIGIN_URL, REQUEST } from '@nguniversal/aspnetcore-engine';
+import { ORIGIN_URL, REQUEST } from '@nguniversal/aspnetcore-engine/tokens';
 import { BrowserTransferStateModule } from '@angular/platform-browser'; //TODO: waiting for angular5 fixes
-import { BrowserPrebootModule } from 'preboot/browser';
+import { PrebootModule } from 'preboot';
 
 import { ClientModuleShared } from './client.module';
 import { ClientComponent } from './client.component';
@@ -19,7 +19,7 @@ export function getRequest() {
 @NgModule({
     bootstrap: [ClientComponent],
     imports: [
-        BrowserPrebootModule.replayEvents(),
+        PrebootModule.withConfig({ appRoot: 'client' }),
         BrowserAnimationsModule,
         ClientModuleShared
     ],

@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserTransferStateModule } from '@angular/platform-browser'; //TODO: waiting for angular5 fixes
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ORIGIN_URL } from '@nguniversal/aspnetcore-engine';
-import { BrowserPrebootModule } from 'preboot/browser';
+import { ORIGIN_URL } from '@nguniversal/aspnetcore-engine/tokens';
+import { PrebootModule } from 'preboot';
 
 import { AdminModuleShared } from './admin.module';
 import { AdminComponent } from './admin.component';
@@ -14,7 +14,7 @@ export function getOriginUrl() {
 @NgModule({
     bootstrap: [AdminComponent],
     imports: [
-        BrowserPrebootModule.replayEvents(),
+        PrebootModule.withConfig({ appRoot: 'admin' }),
         BrowserAnimationsModule,
 
         AdminModuleShared

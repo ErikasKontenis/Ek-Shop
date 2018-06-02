@@ -3,7 +3,7 @@ import { Subject } from 'rxjs/Subject';
 import { Location } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Meta, Title } from '@angular/platform-browser';
-import { ORIGIN_URL } from '@nguniversal/aspnetcore-engine';
+import { ORIGIN_URL } from '@nguniversal/aspnetcore-engine/tokens';
 
 @Injectable()
 export class ComponentFactoryService {

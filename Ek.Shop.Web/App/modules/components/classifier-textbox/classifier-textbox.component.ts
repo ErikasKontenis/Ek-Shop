@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { Subject } from 'rxjs/Subject';
 import { HttpService } from '../../../shared/services/http.service';
 import { Field } from "../../../shared/models/field.model";

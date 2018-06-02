@@ -34,8 +34,8 @@ import { LucidTemplateModule } from './templates/lucid/lucid-template.module';
         FormsModule,
         // TODO: Remove RouterModule from application
         RouterModule.forRoot([{ component: RouterOutletComponent, path: "**", pathMatch: "prefix" }]),
-        // TODO fix uncommenting on prod build
-        ServiceWorkerModule.register('/ngsw-worker.js', { enabled: true }),
+        // TODO make enabled property configurable by working environment debug = false, prod = true
+        ServiceWorkerModule.register('/ngsw-worker.js', { enabled: false }),
         LucidTemplateModule
     ],
     providers: [

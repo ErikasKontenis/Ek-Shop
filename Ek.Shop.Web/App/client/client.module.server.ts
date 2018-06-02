@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { ServerModule } from '@angular/platform-server';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ServerTransferStateModule } from '@angular/platform-server'; //TODO: waiting for angular5 fixes
-import { ServerPrebootModule } from 'preboot/server';
+import { PrebootModule } from 'preboot';
 
 import { ClientModuleShared } from './client.module';
 import { ClientComponent } from './client.component';
@@ -11,7 +11,7 @@ import { ClientComponent } from './client.component';
     bootstrap: [ClientComponent],
     imports: [
         ServerModule,
-        ServerPrebootModule.recordEvents({ appRoot: 'client' }),
+        PrebootModule.withConfig({ appRoot: 'client' }),
         NoopAnimationsModule,
         ClientModuleShared
     ]

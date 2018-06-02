@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { ORIGIN_URL } from '@nguniversal/aspnetcore-engine';
+import { ORIGIN_URL } from '@nguniversal/aspnetcore-engine/tokens';
 import { Injector, Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { Observable } from "rxjs/Observable";
 import 'rxjs/add/observable/throw';
