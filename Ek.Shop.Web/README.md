@@ -8,4 +8,4 @@ add-migration v1; update-database
 
 FIX FOR Node Sass could not find a binding for your current environment:
 
-npm rebuild node-sass 
+npm rebuild node-sass  
