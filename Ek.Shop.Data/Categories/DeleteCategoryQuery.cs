@@ -16,7 +16,7 @@ namespace Ek.Shop.Data.Categories
     public class DeleteCategoryQuery : RemoteQuery<DeleteCategoryCommand, Category>
     {
         private readonly IRemoteQuery<ListRoutesCommand, List<Route>> _listRoutesQuery;
-        private readonly ICache _cache;
+        private readonly ICache _cache; 
 
         public DeleteCategoryQuery(EkShopContext dbContext,
             IRemoteQuery<ListRoutesCommand, List<Route>> listRoutesQuery,
